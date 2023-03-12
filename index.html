@@ -1,23 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
-<body>
-    <h1>Welcome to the homepage</h1>
-    <p><a href="index-uikit copy.html">Links</a>
-    <!--
-    <h2>UIkit</h2>
-    <p><a href="index-uikit.html">Example page</a> and <a href="https://getuikit.com/docs/introduction">documentation</a>.</p>
-    <h2>Bootstrap</h2>
-    <p><a href="index-bootstrap.html">Example page</a> and <a href="https://getbootstrap.com/docs/4.0/getting-started/introduction/">documentation</a>.</p>
-    <h2>Foundation</h2>
-    <p><a href="index-foundation.html">Example page</a> and <a href="https://get.foundation/sites/docs/">documentation</a>.</p>
-    <h2>Bulma</h2>
-    <p><a href="index-bulma.html">Example page</a> and <a href="https://bulma.io/documentation/">documentation</a>.</p>
-    -->
-</body>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- UIkit CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.13.5/dist/css/uikit.min.css" />
+
+        <!-- UIkit JS -->
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.5/dist/js/uikit.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.5/dist/js/uikit-icons.min.js"></script>
+        <title>Homepage</title>
+    </head>
+    <body>
+        <div class="uk-container">
+            <h1>Links</h1>
+            
+            <div class="uk-child-width-1-2@m" uk-grid>
+                <div>
+                    <div class="uk-card uk-card-default">
+                        <div class="uk-card-media-top">
+                            <img src="salty-goyave2.png" width="3000" height="3000" alt="">
+                        </div>
+                        <div class="uk-card-body">
+                            <h3 class="uk-card-title"><span uk-icon="soundcloud"></span></h3>
+                            <p><a href="https://soundcloud.com/saltygoyave">salty goyave</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="uk-card uk-card-default">
+                        <div class="uk-card-media-top">
+                            <img src="Y - Copy.jpg" width="3000" height="3000" alt="">
+                        </div>
+                        <div class="uk-card-body">
+                            <h3 class="uk-card-title"><span uk-icon="youtube"></span></h3>
+                            <p><a href="https://www.youtube.com/@youfinel3959">youfinel</a></p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </body>
 </html>
