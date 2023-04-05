@@ -13,33 +13,36 @@
     </head>
     <body>
         <div class="uk-container">
-            <h1>Links</h1>
+            <h1>Home</h1>
             
-            <div class="uk-child-width-1-2@m" uk-grid>
-                <div>
-                    <div class="uk-card uk-card-default">
-                        <div class="uk-card-media-top">
-                            <img src="salty-goyave2.png" width="3000" height="3000" alt="">
+            <nav class="uk-navbar-container">
+                <div class="uk-container">
+                    <div uk-navbar>
+            
+                        <div class="uk-navbar-left">
+            
+                            <ul class="uk-navbar-nav">
+                                <li class="uk-active"><a href="index.html">Home</a></li>
+                                <li>
+                                    <a href="#">Projects</a>
+                                    <div class="uk-navbar-dropdown">
+                                        <ul class="uk-nav uk-navbar-dropdown-nav">
+                                            <li class="uk-active"><a href="#">Active</a></li>
+                                            <li><a href="#">Test 1</a></li>
+                                            <li><a href="#">Test 2</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li><a href="links.html">Links</a></li>
+                            </ul>
+            
                         </div>
-                        <div class="uk-card-body">
-                            <h3 class="uk-card-title"><span uk-icon="soundcloud"></span></h3>
-                            <p><a href="https://soundcloud.com/saltygoyave">salty goyave</a></p>
-                        </div>
+            
                     </div>
                 </div>
-                <div>
-                    <div class="uk-card uk-card-default">
-                        <div class="uk-card-media-top">
-                            <img src="Y - Copy.jpg" width="3000" height="3000" alt="">
-                        </div>
-                        <div class="uk-card-body">
-                            <h3 class="uk-card-title"><span uk-icon="youtube"></span></h3>
-                            <p><a href="https://www.youtube.com/@youfinel3959">youfinel</a></p>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </nav>
+
+            
 
         </div>
     </body>
