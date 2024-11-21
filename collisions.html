@@ -13,73 +13,24 @@
     </head>
     <body>
 
-        <nav class="uk-navbar-container">
-            <div class="uk-container">
-                <div uk-navbar>
-        
-                    <div class="uk-navbar-left">
-        
-                        <ul class="uk-navbar-nav">
-                            <li><a href="index.html">Home</a></li>
-                            <li class="uk-active">
-                                <a>Projects<span uk-icon="icon: chevron-down"></span></a>
-                                <div class="uk-navbar-dropdown">
-                                    <ul class="uk-nav uk-navbar-dropdown-nav">
-                                        <li><a href="celestial-cycle.html">Celestial Cycle</a></li>
-                                        <li><a href="pale-blue-dot.html">The Pale Blue Dot</a></li>
-                                        <li class="uk-active"><a>Collisions</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li><a href="links.html">Links</a></li>
-                        </ul>
-        
-                    </div>
-        
-                </div>
-            </div>
-        </nav>
+        <div id="navbar-placeholder"></div>
+    
+        <script>
+            fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+            });
+        </script>
 
         <div class="uk-container">
+
             <div class="uk-card uk-card-default uk-card-small">
                 <div class="uk-card-header">
-                    <h3 class="uk-card-title uk-text-center"><b>The Outcome of Collisions between Gaseous Clumps formed by Disk Instability</b></h3>
-                </div>
-                <div class="uk-text-justify uk-card-body">
-                    We don't fully understand how giant gas planets like Saturn and Jupiter were formed. <br>
-                    There are two main theories that attempt to explain how these gas giants arise from a disk of gas and dust surrounding a star. <br>
-                    The more widely accepted theory, called core accretion, suggests that giant planets form when a solid core forms first, followed by the accumulation of gas from the surrounding disk. <br>
-                    While this theory explains many observations, it does not fit all of them, leading to the development of an alternative theory: the disk instability model. <br>
-                    This model proposes that if a massive gas disk becomes unstable, it can break apart into dense clumps, which then collapse to form gas giants. <br>
-                    Several of these clumps can form around the star and collide with one another, potentially creating violent interactions that play a key role in the formation of the planets. <br>
-                    In our paper, we run numerical simulations to better understand what happens during these cosmic collisions.
-                </div>
-
-            
-            </div>
-        </div>
-
-        <p></p>
-
-        <div class="uk-container">
-            <div class="uk-child-width-1-2@s uk-grid-match uk-text-center" uk-grid>
-            
-                <div class="uk-width-1-2@m">
-                    <div class="uk-card uk-card-default uk-card-body">
-                        <a href="https://www.aanda.org/articles/aa/full_html/2024/11/aa50900-24/aa50900-24.html" class="uk-button">
-                            <img src="logo/logo_aa.svg" uk-svg>
-                        </a>
-                    </div>
-                </div>
-                <div class="uk-width-1-2@m">
-                    <div class="uk-card uk-card-default uk-card-body">
-                        <a href="https://arxiv.org/abs/2410.02928" class="uk-button">
-                            <img src="logo/logo_arxiv.svg" uk-svg>
-                        </a>
-                    </div>
+                    <h3 class="uk-card-title uk-text-center">The Outcome of Collisions between Gaseous Clumps formed by Disk Instability</h3>
                 </div>
             </div>
-    
+
         </div>
 
         <p></p>
@@ -108,6 +59,53 @@
             
             </div>
         </div>
+
+        <p></p>
+
+        <div class="uk-container">
+            <div class="uk-card uk-card-default uk-card-small">
+                
+                <div class="uk-card uk-card-default uk-card-body uk-margin-small">
+                
+                    <p>We do not fully understand how giant gas planets like Saturn and Jupiter were formed. </p>
+                    <p>There are two main theories that attempt to explain how these gas giants arise from a disk of gas and dust surrounding a star. </p>
+                    <p>The more widely known theory, called core accretion, suggests that giant planets emerge when a solid core forms first, followed by the accumulation of gas from the surrounding disk.</p>
+                    <p>While this theory explains many observations, it does not fit all of them, leading to the development of an alternative theory: the disk instability model. </p>
+                    <p>This model proposes that if a massive gas disk becomes unstable, it can break apart into dense clumps, which then collapse to form gas giants. </p>
+                    <p>Several of these clumps can form around the star and collide with one another, potentially creating violent interactions that play a key role in the formation of the planets. </p>
+                    <p>In our paper, we run numerical simulations to better understand what happens during these cosmic collisions.</p>
+                </div>
+
+            
+            </div>
+        </div>
+
+        <p></p>
+
+        <div class="uk-container">
+            <div class="uk-child-width-1-2@m uk-grid-match uk-text-center" uk-grid>
+            
+                <div class="uk-width-1-2@m">
+                    <div class="uk-card uk-card-default uk-card-small uk-card-body">
+                        <a href="https://www.aanda.org/articles/aa/full_html/2024/11/aa50900-24/aa50900-24.html" class="uk-button uk-width-1-1 uk-button-large">
+                            <img src="logo/logo_aa.svg" uk-svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="uk-width-1-2@m">
+                    <div class="uk-card uk-card-default uk-card-small uk-card-body">
+                        <a href="https://arxiv.org/abs/2410.02928" class="uk-button uk-width-1-1 uk-button-large">
+                            <img src="logo/logo_arxiv.svg" uk-svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+
+        <p></p>
+
+        
 
         <p></p>
         <!--

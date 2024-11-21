@@ -14,32 +14,15 @@
     </head>
     <body>
 
-        <nav class="uk-navbar-container">
-            <div class="uk-container">
-                <div uk-navbar>
-        
-                    <div class="uk-navbar-left">
-        
-                        <ul class="uk-navbar-nav">
-                            <li><a href="index.html">Home</a></li>
-                            <li class="uk-active">
-                                <a>Projects<span uk-icon="icon: chevron-down"></span></a>
-                                <div class="uk-navbar-dropdown">
-                                    <ul class="uk-nav uk-navbar-dropdown-nav">
-                                        <li class="uk-active"><a href="celestial-cycle.html">Celestial Cycle</a></li>
-                                        <li><a href="pale-blue-dot.html">The Pale Blue Dot</a></li>
-                                        <li><a href="collisions.html">Collisions</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li><a href="links.html">Links</a></li>
-                        </ul>
-        
-                    </div>
-        
-                </div>
-            </div>
-        </nav>
+        <div id="navbar-placeholder"></div>
+    
+        <script>
+            fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+            });
+        </script>
 
         <div class="uk-container">
             
