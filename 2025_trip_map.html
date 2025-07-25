@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml">
+	<head>
+		<title>trip_locations</title>
+		<base target="_top"></base>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		<meta name="geo.position" content="-11.0655546; -73.1566266" />
+		<meta name="ICBM" content="-11.0655546, -73.1566266" />
+	</head>
+	<body style="margin:0px;">
+		
+		<script type="text/javascript">
+			API = 'leaflet'; // can be either 'leaflet' or 'google'
+			if (self.API && API.match(/^g/i)) {
+				google_api_key = ''; // Your project's Google Maps API key goes here (https://code.google.com/apis/console)
+				language_code = '';
+				document.writeln('<script src="https://maps.googleapis.com/maps/api/js?v=3&amp;libraries=geometry&amp;language='+(self.language_code?self.language_code:'')+'&amp;key='+(self.google_api_key?self.google_api_key:'')+'" type="text/javascript"><'+'/script>');
+			} else {
+				document.writeln('<link href="https://maps.gpsvisualizer.com/leaflet/leaflet.css" rel="stylesheet" />');
+				document.writeln('<script src="https://maps.gpsvisualizer.com/leaflet/leaflet.js" type="text/javascript"><'+'/script>');
+			}
+			thunderforest_api_key = ''; // To display OpenStreetMap tiles from ThunderForest, you need a key (https://www.thunderforest.com/docs/apikeys/)
+			tracestrack_api_key = ''; // To display topo tiles from Tracestrack, you need a key (https://console.tracestrack.com/explorer)
+			ign_api_key = ''; // To display topo tiles from IGN.fr, you need a key (https://api.ign.fr/)
+		</script>
+
+		
+		<!--
+			If you want to transplant this map into another Web page, by far the best method is to
+			simply include it in a IFRAME tag (see https://www.gpsvisualizer.com/faq.html#google_html).
+			But, if you must paste the code into another page, be sure to include all of these parts:
+			   1. The "div" tags that contain the map and its widgets, below
+			   2. Three sections of JavaScript code:
+			      a. The API code (from googleapis.com or /leaflet), above
+			      b. "gv_options" and the code that calls a .js file on gpsvisualizer.com
+			      c. The "GV_Map" function, which contains all the geographic info for the map
+		-->
+		<div style="margin-left:0px; margin-right:0px; margin-top:0px; margin-bottom:0px;">
+			<div id="gmap_div" style="width:100%; height:100%; margin:0px; margin-right:12px; background-color:#f0f0f0; float:left; overflow:hidden;">
+				<p style="text-align:center; font:10px Arial;">This map was created using <a target="_blank" href="https://www.gpsvisualizer.com/">GPS Visualizer</a>'s do-it-yourself geographic utilities.<br /><br />Please wait while the map data loads...</p>
+			</div>
+				
+			<div id="gv_infobox" class="gv_infobox" style="font:11px Arial; border:solid #666666 1px; background-color:#ffffff; padding:4px; overflow:auto; display:none; max-width:400px;">
+				<!-- Although GPS Visualizer didn't create an legend/info box with your map, you can use this space for something else if you'd like; enable it by setting gv_options.infobox_options.enabled to true -->
+			</div>
+
+
+			<div id="gv_tracklist" class="gv_tracklist" style="font:11px Arial; line-height:11px; background-color:#ffffff; overflow:auto; display:none;"><!-- --></div>
+
+
+			<div id="gv_clear_margins" style="height:0px; clear:both;"><!-- clear the "float" --></div>
+		</div>
+
+		
+		<!-- begin GPS Visualizer setup script (must come after loading of API code) -->
+		<script type="text/javascript">
+			/* Global variables used by the GPS Visualizer functions (20250725062146): */
+			gv_options = {};
+			
+			// basic map parameters:
+			gv_options.center = [-11.06555463,-73.1566266];  // [latitude,longitude] - be sure to keep the square brackets
+			gv_options.zoom = 4.5;  // higher number means closer view; can also be 'auto' for automatic zoom/center based on map elements
+			gv_options.map_type = 'OPENSTREETMAP';  // popular map_type choices are 'GV_STREET', 'GV_SATELLITE', 'GV_HYBRID', 'GV_TERRAIN', 'GV_OSM', 'GV_TOPO_US', 'GV_TOPO_WORLD' (https://www.gpsvisualizer.com/misc/leaflet_map_types.html)
+			gv_options.map_opacity = 1.00;  // number from 0 to 1
+			gv_options.full_screen = true;  // true|false: should the map fill the entire page (or frame)?
+			gv_options.width = 700;  // width of the map, in pixels
+			gv_options.height = 700;  // height of the map, in pixels
+			
+			gv_options.map_div = 'gmap_div';  // the name of the HTML "div" tag containing the map itself; usually 'gmap_div'
+			gv_options.doubleclick_zoom = true;  // true|false: zoom in when mouse is double-clicked?
+			gv_options.doubleclick_center = true;  // true|false: re-center the map on the point that was double-clicked?
+			gv_options.scroll_zoom = true; // true|false; or 'reverse' for down=in and up=out
+			gv_options.page_scrolling = true; // true|false; does the map relenquish control of the scroll wheel when embedded in scrollable pages?
+			gv_options.autozoom_adjustment = 0; gv_options.autozoom_default = 11;
+			gv_options.centering_options = { 'open_info_window':true, 'partial_match':true, 'center_key':'center', 'default_zoom':null } // URL-based centering (e.g., ?center=name_of_marker&zoom=14)
+			gv_options.street_view = false; // true|false: allow Google Street View on the map (Google Maps only)
+			gv_options.tilt = false; // true|false: allow Google Maps to show 45-degree tilted aerial imagery?
+			gv_options.disable_google_pois = false;  // true|false: if you disable clickable POIs on Google Maps, you also lose the labels on parks, airports, etc.
+			gv_options.animated_zoom = true; // true|false: only affects Leaflet maps
+			
+			// widgets on the map:
+			gv_options.zoom_control = 'none'; // 'auto'|'large'|'small'|'none'
+			gv_options.recenter_button = true; // true|false: is there a 'click to recenter' button above the zoom control?
+			gv_options.geolocation_control = false; // true|false; only works on secure servers
+			gv_options.geolocation_options = { center:true, zoom:null, marker:true, info_window:false };
+			gv_options.scale_control = false; // true|false
+			gv_options.map_opacity_control = false;  // true|false
+			gv_options.map_type_control = {};  // widget to change the background map
+			  gv_options.map_type_control.visible = false; // true|false|'auto': is a map type control placed on the map itself?
+			  gv_options.map_type_control.filter = false;  // true|false: when map loads, are irrelevant maps ignored?
+			  gv_options.map_type_control.excluded = [];  // comma-separated list of quoted map IDs that will never show in the list ('included' also works)
+			gv_options.center_coordinates = false;  // true|false: show a "center coordinates" box and crosshair?
+			gv_options.measurement_tools = false; // true|false: put a measurement ruler on the map?
+			gv_options.measurement_options = { visible:false, distance_color:'', area_color:'' };
+			gv_options.crosshair_hidden = true;  // true|false: hide the crosshair initially?
+			gv_options.crosshair_permanent = false; // if true, overrides crosshair_hidden
+			gv_options.mouse_coordinates = false;  // true|false: show a "mouse coordinates" box?
+			gv_options.utilities_menu = { 'maptype':false, 'opacity':false, 'measure':false, 'geolocate':false, 'profile':false };
+			gv_options.allow_export = false;  // true|false
+			
+			gv_options.infobox_options = {}; // options for a floating info box (id="gv_infobox"), which can contain anything
+			  gv_options.infobox_options.enabled = false;  // true|false: enable or disable the info box altogether
+			  gv_options.infobox_options.position = ['LEFT_TOP',52,4];  // [Google anchor name, relative x, relative y]
+			  gv_options.infobox_options.draggable = false;  // true|false: can it be moved around the screen?
+			  gv_options.infobox_options.collapsible = false;  // true|false: can it be collapsed by double-clicking its top bar?
+			
+			// track-related options:
+			gv_options.track_optimization = 1; // sets Leaflet's smoothFactor parameter
+			gv_options.track_tooltips = false; // true|false: should the name of a track appear on the map when you mouse over the track itself?
+			gv_options.tracklist_options = {}; // options for a floating list of the tracks visible on the map
+			  gv_options.tracklist_options.enabled = false;  // true|false: enable or disable the tracklist altogether
+			  gv_options.tracklist_options.position = ['RIGHT_TOP',4,32];  // [Google anchor name, relative x, relative y]
+			  gv_options.tracklist_options.min_width = 100; // minimum width of the tracklist, in pixels
+			  gv_options.tracklist_options.max_width = 180; // maximum width of the tracklist, in pixels
+			  gv_options.tracklist_options.min_height = 0; // minimum height of the tracklist, in pixels; if the list is longer, scrollbars will appear
+			  gv_options.tracklist_options.max_height = 310; // maximum height of the tracklist, in pixels; if the list is longer, scrollbars will appear
+			  gv_options.tracklist_options.desc = false;  // true|false: should tracks' descriptions be shown in the list
+			  gv_options.tracklist_options.toggle = false;  // true|false: should clicking on a track's name turn it on or off?
+			  gv_options.tracklist_options.checkboxes = true;  // true|false: should there be a separate icon/checkbox for toggling visibility?
+			  gv_options.tracklist_options.zoom_links = true;  // true|false: should each item include a small icon that will zoom to that track?
+			  gv_options.tracklist_options.highlighting = true;  // true|false: should the track be highlighted when you mouse over the name in the list?
+			  gv_options.tracklist_options.tooltips = false;  // true|false: should the name of the track appear on the map when you mouse over the name in the list?
+			  gv_options.tracklist_options.draggable = true;  // true|false: can it be moved around the screen?
+			  gv_options.tracklist_options.collapsible = true;  // true|false: can it be collapsed by double-clicking its top bar?
+			  gv_options.tracklist_options.header = 'Tracks:'; // HTML code; be sure to put backslashes in front of any single quotes, and don't include any line breaks
+			  gv_options.tracklist_options.footer = ''; // HTML code
+			gv_options.profile_options = { visible:false, icon:false, units:'metric', filled:true, waypoints:true, height:120, width:'100%', y_min:null, y_max:null, gap_between_tracks:false }; // see https://www.gpsvisualizer.com/tutorials/profiles_in_maps.html
+
+
+			// marker-related options:
+			gv_options.default_marker = { color:'red',icon:'googlemini',scale:1 }; // icon can be a URL, but be sure to also include size:[w,h] and optionally anchor:[x,y]
+			gv_options.vector_markers = true; // are the icons on the map in embedded SVG format?
+			gv_options.marker_tooltips = true; // do the names of the markers show up when you mouse-over them?
+			gv_options.marker_shadows = true; // true|false: do the standard markers have "shadows" behind them?
+			gv_options.marker_link_target = '_blank'; // the name of the window or frame into which markers' URLs will load
+			gv_options.info_window_width = 0;  // in pixels, the width of the markers' pop-up info "bubbles" (can be overridden by 'window_width' in individual markers)
+			gv_options.thumbnail_width = 0;  // in pixels, the width of the markers' thumbnails (can be overridden by 'thumbnail_width' in individual markers)
+			gv_options.photo_size = [0,0];  // in pixels, the size of the photos in info windows (can be overridden by 'photo_width' or 'photo_size' in individual markers)
+			gv_options.hide_labels = false;  // true|false: hide labels when map first loads?
+			gv_options.labels_behind_markers = false; // true|false: are the labels behind other markers (true) or in front of them (false)?
+			gv_options.label_offset = [0,0];  // [x,y]: shift all markers' labels (positive numbers are right and down)
+			gv_options.label_centered = false;  // true|false: center labels with respect to their markers?  (label_left is also a valid option.)
+			gv_options.driving_directions = false;  // put a small "driving directions" form in each marker's pop-up window? (override with dd:true or dd:false in a marker's options)
+			gv_options.garmin_icon_set = '24x24'; // 'gpsmap' are the small 16x16 icons; change it to '24x24' for larger icons
+				
+
+			
+			// Load GPS Visualizer's mapping functions (this must be loaded AFTER gv_options are set):
+			var script_file = (self.API && API.match(/^g/i)) ? 'google_maps/functions3.js' : 'leaflet/functions.js';
+			document.writeln('<script src="https://maps.gpsvisualizer.com/'+script_file+'" type="text/javascript"><'+'/script>');
+		</script>
+		<style type="text/css">
+			/* Put any custom style definitions here (e.g., .gv_marker_info_window, .gv_marker_info_window_name, .gv_marker_list_item, .gv_tooltip, .gv_label, etc.) */
+			#gmap_div .gv_marker_info_window {
+				font-size:11px !important;
+			}
+			#gmap_div .gv_label {
+				opacity:0.90; filter:alpha(opacity=90);
+				color:white; background:#333333; border:1px solid black; padding:1px;
+				font-family:Verdana !important; font-size:10px;
+				font-weight:normal !important;
+			}
+			.gv_tooltip {
+				font:10px Verdana,sans-serif; color:black; background-color:white; border:1px solid #666666; padding:0px; opacity:1 !important;
+			}
+			.legend_block {
+				display:inline-block; border:solid 1px black; width:9px; height:9px; margin:0px 2px 0px 0px;
+			}
+			
+		</style>
+		
+		<!-- end GPSV setup script and styles; begin map-drawing script (they must be separate) -->
+		<script type="text/javascript">
+			function GV_Map() {
+				GV_Setup_Map();
+				
+				// Track #1
+				t = 1; trk[t] = {info:[],segments:[]};
+				trk[t].info.name = 'Trip'; trk[t].info.desc = ''; trk[t].info.clickable = true;
+				trk[t].info.color = '#e60000'; trk[t].info.width = 3; trk[t].info.opacity = 0.9; trk[t].info.hidden = false; trk[t].info.z_index = null;
+				trk[t].info.outline_color = 'black'; trk[t].info.outline_width = 0; trk[t].info.fill_color = '#e60000'; trk[t].info.fill_opacity = 0;
+				trk[t].segments.push({ points:[[-33.4407876,-70.6335168],[-33.4493644,-70.6279791],[-33.44762111,-70.63587775],[-33.045105,-71.6230527],[-32.94412646,-71.54769875],[-29.9, -71.25],[-30.1259013,-70.4892268],[-30.1278825,-70.49583],[-27.383837,-70.3294853],[-27.48602928,-69.25738194],[-27.08117488,-69.17628422],[-26.3418641,-70.6173956],[-26.15082818,-70.66731697],[-26.01113297,-70.60409463],[-26.27089743,-70.65368165],[-25.41699449,-70.52154715],[-23.66390915,-70.39754947],[-23.6586973,-70.4010565],[-24.6272099,-70.40429804],[-22.9499728,-68.2992057],[-22.33103461,-68.0110904],[-21.7534513,-67.483299],[-21.15382205,-67.1654717],[-20.3280796,-67.0112405],[-19.0684713,-65.274006],[-19.0505969,-65.2636734],[-19.04713548,-65.26267858],[-19.0467901,-65.2603551],[-17.38605605,-66.15799966],[-17.4021541,-66.1545283],[-18.11735419,-65.77355778],[-16.4884101,-68.1437536],[-16.4977224,-68.1311957],[-16.49820403,-68.17458009],[-16.554722, -68.673333],[-16.3106007,-68.13377],[-16.2741886,-68.1398092],[-16.26243392,-68.15411987],[-16.0644241,-69.1351285],[-16.045008,-69.149961],[-16.0346897,-69.1485478],[-16.1171253,-69.1136455],[-16.16538721,-69.08986749],[-13.5346575,-71.9653586],[-13.5209692,-71.9759621],[-13.3803484,-72.5838702],[-13.3191617,-72.6684066],[-13.1851858,-72.5840939],[-13.1543187,-72.5253213],[-13.1568507,-72.54617],[-13.5150144,-71.9747582],[-13.5204036,-71.9827421],[-13.2583007,-72.2635383],[-13.514203,-71.9801228],[-13.83421445,-76.24817938],[-13.83398227,-76.25027052],[-14.0809157,-75.7745331],[-14.0763858,-75.7709727],[-12.1001455,-76.9798183],[-12.20902765,-77.02384611],[-12.1325772,-77.0301513],[-12.11821835,-77.02499271],[-12.0445698,-77.0268836],[-9.5312195,-77.5340966],[-9.01171831,-77.6106175],[-8.9238976,-77.5618023],[-8.935711,-77.6707295],[-8.9561081,-77.7775301],[-9.5256428,-77.5328273],[-8.0737118,-79.118882],[-8.1398918,-78.9929755],[-8.07696795,-79.11862172],[-8.0784954,-79.1203312],[-8.0736193,-79.1185083],[-7.70298875,-79.44282536],[-8.0866267,-79.1224475],[-4.1067265,-81.0528981],[-2.890676,-78.9895593],[-2.9055797,-79.0024912],[-2.8955188,-79.0046033],[-2.7563034,-79.2369919],[-2.0813526,-79.9374816],[-1.82484583,-80.75371729],[-1.7996811,-80.7562709],[-1.829847,-80.7507149],[-1.3982212,-78.4185688],[-1.40167898,-78.40092248],[-1.4012247,-78.2963198],[-0.2210175,-78.5070204],[-0.1871122,-78.5375041],[-0.0454998,-76.1612656],[-0.05697369,-76.16614077],[-0.0894137,-76.175535],[-0.03819137,-76.19849923],[-0.0303719,-76.3158977],[-0.2017258,-78.4899188],[0.8271007,-77.6310605],[4.6381393,-75.5690207],[4.6284355,-75.5968719],[4.5373975,-75.4755723],[5.64256859,-75.80800172],[5.5913669,-75.8200102],[6.2123425,-75.5761538],[6.253199,-75.6219445],[6.2081576,-75.5643481],[10.4257175,-75.5487528],[10.4345763,-75.5361589],[11.2669726,-74.1909828],[11.26558028,-74.19107805],[11.2669558,-74.1909383],[11.2423602,-73.7628286],[11.2424977,-73.7635172],[11.25014904,-73.76868337],[11.2847466,-73.8982498],[11.31825514,-73.99584643],[11.2528947,-73.557933],[11.25546894,-73.55632605],[11.1417364,-74.115159],[11.1402228,-74.125373],[11.1419015,-74.1206002],[11.1408186,-74.1193246],[11.144478,-74.1174547],[11.2500014,-74.214159],[11.2217218,-74.1806587],[4.6486229,-74.1267114],[4.59508494,-74.07219874],[4.600887,-74.0687311],[4.6979012,-74.1395409] ] });
+				GV_Draw_Track(t);
+				
+				t = 1; GV_Add_Track_to_Tracklist({bullet:'- ',name:trk[t].info.name,desc:trk[t].info.desc,color:trk[t].info.color,number:t});
+				
+				
+				
+				GV_Finish_Map();
+					
+			}
+			GV_Map(); // execute the above code
+			// https://www.gpsvisualizer.com/map_input?form=leaflet
+		</script>
+		
+		
+		
+	</body>
+	
+</html>
