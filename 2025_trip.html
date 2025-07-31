@@ -12,6 +12,18 @@
         <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.5/dist/js/uikit-icons.min.js"></script>
         <title>2025</title>
 
+        <style>
+            .iframe-container {
+            height: calc(100vh - 100px); /* Adjust for scrollbar */
+            }
+
+            .iframe-container iframe {
+            height: 100%;
+            width: 100%;
+            border: none;
+            }
+        </style>
+
     </head>
     <body>
 
@@ -36,10 +48,9 @@
             window.addEventListener("resize", setIframeHeight);
         </script>
 
-        <div class="uk-container">
-            
-            <div class="uk-card uk-card-default uk-card-small">
-                <iframe id="2025_map" width="100%"  height="100%" src="2025_trip_map.html"></iframe>
+        <div class="uk-container uk-flex uk-flex-column uk-flex-middle">
+            <div class="iframe-container" style="width: 100%;">
+            <iframe src="2025_trip_map.html"></iframe>
             </div>
         </div>
 
