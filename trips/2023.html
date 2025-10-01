@@ -10,36 +10,36 @@
         <!-- UIkit JS -->
         <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.5/dist/js/uikit.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.5/dist/js/uikit-icons.min.js"></script>
-        <title>Home</title>
+        <title>2023</title>
 
         <style>
-            .pdf-container {
+            .iframe-container {
             height: calc(100vh - 100px); /* Adjust for scrollbar */
             }
 
-            .pdf-container object {
+            .iframe-container iframe {
             height: 100%;
             width: 100%;
             border: none;
             }
         </style>
+
     </head>
     <body>
 
         <div id="navbar-placeholder"></div>
 
         <script>
-            fetch('navbar.html')
+            fetch('../navbar.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('navbar-placeholder').innerHTML = data;
             });
         </script>
-
+  
         <div class="uk-container uk-flex uk-flex-column uk-flex-middle">
-            <div class="pdf-container" style="width: 100%;">
-            <object class="pdf" data="semester_project.pdf">
-            </object>
+            <div class="iframe-container" style="width: 100%;">
+            <iframe src="2023_trip_map.html"></iframe>
             </div>
         </div>
 

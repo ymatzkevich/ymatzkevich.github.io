@@ -16,7 +16,7 @@
         <div id="navbar-placeholder"></div>
     
         <script>
-            fetch('navbar.html')
+            fetch('../navbar.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('navbar-placeholder').innerHTML = data;
@@ -41,16 +41,16 @@
 
                 <div class="uk-slideshow-items">
                     <div>
-                        <img src="collisions/collapse.gif" alt="" uk-cover>
+                        <img src="../media/collisions/collapse.gif" alt="" uk-cover>
                     </div>
                     <div>
-                        <video src="collisions/disruption.mp4" autoplay loop muted playsinline uk-cover></video>
+                        <video src="../media/collisions/disruption.mp4" autoplay loop muted playsinline uk-cover></video>
                     </div>
                     <div>
-                        <video src="collisions/graze-merge.mp4" autoplay loop muted playsinline uk-cover></video>
+                        <video src="../media/collisions/graze-merge.mp4" autoplay loop muted playsinline uk-cover></video>
                     </div>
                     <div>
-                        <video src="collisions/merger.mp4" autoplay loop muted playsinline uk-cover></video>
+                        <video src="../media/collisions/merger.mp4" autoplay loop muted playsinline uk-cover></video>
                     </div>
                 </div>
             
@@ -88,14 +88,14 @@
                 <div class="uk-width-1-2@m">
                     <div class="uk-card uk-card-default uk-card-small uk-card-body">
                         <a href="https://www.aanda.org/articles/aa/full_html/2024/11/aa50900-24/aa50900-24.html" class="uk-button uk-width-1-1 uk-button-large">
-                            <img src="logo/logo_aa.svg" uk-svg>
+                            <img src="../media/logo/logo_aa.svg" uk-svg>
                         </a>
                     </div>
                 </div>
                 <div class="uk-width-1-2@m">
                     <div class="uk-card uk-card-default uk-card-small uk-card-body">
                         <a href="https://arxiv.org/abs/2410.02928" class="uk-button uk-width-1-1 uk-button-large">
-                            <img src="logo/logo_arxiv.svg" uk-svg>
+                            <img src="../media/logo/logo_arxiv.svg" uk-svg>
                         </a>
                     </div>
                 </div>

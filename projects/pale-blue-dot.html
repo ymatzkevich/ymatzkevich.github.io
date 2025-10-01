@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" type="image/svg" href="smiley.svg">
+        <link rel="icon" type="image/svg" href="/media/smiley.svg">
         <!-- UIkit CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.13.5/dist/css/uikit.min.css" />
 
@@ -17,7 +17,7 @@
         <div id="navbar-placeholder"></div>
     
         <script>
-            fetch('navbar.html')
+            fetch('../navbar.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('navbar-placeholder').innerHTML = data;
@@ -34,7 +34,7 @@
         <div class="uk-container">
             <div class="uk-card uk-card-default">
                 <div class="uk-card-media-top">
-                    <img src="pale-blue-dot.jpeg" width="1800" height="1200" alt="">
+                    <img src="../media/pale_blue_dot.jpeg" width="1800" height="1200" alt="">
                 </div>
                 <div class="uk-card-body uk-text-justify">
                     
