@@ -14,13 +14,11 @@
 
         <style>
             .pdf-container {
-            height: calc(100vh - 100px); /* Adjust for scrollbar */
+                height: calc(100vh - 100px); /* Adjust for scrollbar */
             }
-
-            .pdf-container object {
-            height: 100%;
-            width: 100%;
-            border: none;
+            #pdf {
+                height: 100%;
+                width: 100%;
             }
         </style>
     </head>
@@ -38,9 +36,13 @@
 
         <div class="uk-container uk-flex uk-flex-column uk-flex-middle">
             <div class="pdf-container" style="width: 100%;">
-            <object class="pdf" data="../documents/semester_project.pdf">
-            </object>
+                <div id="pdf"></div>
             </div>
+            <script src="https://unpkg.com/pdfobject@2.3.1/pdfobject.min.js"></script>
+            <script>
+                const pdfDiv = document.getElementById("pdf");
+                PDFObject.embed("../documents/semester_project.pdf", pdfDiv);
+            </script>
         </div>
 
     </body>
