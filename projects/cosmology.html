@@ -41,7 +41,8 @@
             <script src="https://unpkg.com/pdfobject@2.3.1/pdfobject.min.js"></script>
             <script>
                 const pdfDiv = document.getElementById("pdf");
-                PDFObject.embed("../documents/semester_project.pdf", pdfDiv);
+                let customFallbackMessage = "oh shoot, it seems like your browser does not support inline PDFs :| no worries you can open it <a href='../documents/semester_project.pdf'>here</a>!";
+                PDFObject.embed("../documents/semester_project.pdf", pdfDiv, { fallbackLink: customFallbackMessage });
             </script>
         </div>
 
