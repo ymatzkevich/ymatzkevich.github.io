@@ -10,7 +10,7 @@
         <!-- UIkit JS -->
         <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.5/dist/js/uikit.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.5/dist/js/uikit-icons.min.js"></script>
-        <title>2023</title>
+        <title>2026</title>
 
         <style>
             .iframe-container {
@@ -36,10 +36,21 @@
                 document.getElementById('navbar-placeholder').innerHTML = data;
             });
         </script>
-  
+
+        
+        <script>
+            function setIframeHeight() {
+            const height = window.innerHeight * 0.8; // 90% of viewport
+            document.getElementById("2026_map").style.height = height + "px";
+            }
+        
+            window.addEventListener("load", setIframeHeight);
+            window.addEventListener("resize", setIframeHeight);
+        </script>
+
         <div class="uk-container uk-flex uk-flex-column uk-flex-middle">
             <div class="iframe-container" style="width: 100%;">
-            <iframe id="2023_map" src="2023_trip_map.html"></iframe>
+            <iframe id="2026_map" src="2026_trip_map.html"></iframe>
             </div>
         </div>
 
